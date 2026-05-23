@@ -1,0 +1,25 @@
+{
+  "name": "trabalho-conclusao-programacao-para-automacao-de-testes",
+  "version": "1.0.0",
+  "description": "O Trabalho de Conclusão da Disciplina exercício prático de Javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter mochawesome"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rafael-Brum/trabalho-conclusao-programacao-para-automacao-de-testes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Rafael-Brum/trabalho-conclusao-programacao-para-automacao-de-testes/issues"
+  },
+  "homepage": "https://github.com/Rafael-Brum/trabalho-conclusao-programacao-para-automacao-de-testes#readme",
+  "dependencies": {
+    "mocha": "^11.7.5",
+    "mochawesome": "^7.1.4"
+  }
+}
