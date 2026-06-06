@@ -37,14 +37,32 @@ Os testes cobrem os seguintes cenários:
 
 ## Como Executar os Testes
 1. Instale as dependências:
-	```bash
-	npm install
-	```
+    ```bash
+    npm install
+    ```
 2. Execute os testes:
-	```bash
-	npm test
-	```
+    ```bash
+    npm test
+    ```
 3. O relatório será gerado na pasta `mochawesome-report/`.
+
+## Pipeline CI/CD (GitHub Actions)
+Este projeto implementa uma **Pipeline de Integração Contínua** que automatiza a execução de testes a cada mudança no código.
+
+### 3 Formas de Execução
+1. **PUSH (Automático)**: A pipeline dispara automaticamente ao fazer `git push` para a branch `master`.
+2. **MANUAL (workflow_dispatch)**: Acesse GitHub → Actions → "CI - Testes Unitários" → "Run workflow" para executar sob demanda.
+3. **SCHEDULE (Agendado)**: A pipeline executa automaticamente todos os dias às 08:00 UTC.
+
+### Relatório de Testes
+- O relatório visual (HTML) é gerado automaticamente pelo **Mochawesome** após cada execução.
+- Acesse o relatório em: GitHub → Actions → (execução desejada) → Artifacts → `mochawesome-report`
+- O arquivo `mochawesome.html` contém gráficos, tabelas e detalhes de cada teste executado.
+
+### Armazenamento de Artefatos
+- Os relatórios são armazenados como **artifacts** no GitHub por **30 dias**.
+- Você pode baixar e analisar o histórico de testes a qualquer momento.
+- Consulte [PIPELINE_CI_CD.md](PIPELINE_CI_CD.md) para documentação completa sobre CI/CD.
 
 ---
 Desenvolvido para fins acadêmicos.
