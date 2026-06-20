@@ -1,0 +1,97 @@
+# ============================================================
+# CI/CD Pipeline - Integração Contínua para Testes Unitários
+# ============================================================
+# Projeto: Trabalho de Conclusão - Programação para Automação de Testes
+# Descrição: Pipeline que executa testes unitários com Mocha e gera 
+#            relatório visual com Mochawesome
+
+name: "CI - Testes Unitários"
+
+# ============================================================
+# GATILHOS (TRIGGERS) - Define QUANDO a pipeline executa
+# ============================================================
+on:
+  # 1️⃣ GATILHO DE PUSH - Executa automaticamente ao fazer push para master
+  push:
+    branches:
+      - master
+
+  # 2️⃣ GATILHO MANUAL - Executa quando acionado manualmente no GitHub
+  workflow_dispatch:
+
+  # 3️⃣ GATILHO AGENDADO - Executa em horários pré-definidos (schedule)
+  schedule:
+    # Executa todos os dias às 08:00 (horário UTC)
+    # Formato: minuto hora dia-do-mês mês dia-da-semana
+    - cron: '0 8 * * *'
+
+# ============================================================
+# JOBS - Tarefas que serão executadas na pipeline
+# ============================================================
+jobs:
+  # Job principal: Executar testes unitários
+  testes-unitarios:
+    name: "Executar Testes com Mocha"
+    
+    # Sistema operacional onde o job vai rodar
+    runs-on: ubuntu-latest
+    
+    # Versão Node.js a usar
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    # Passos (steps) que compõem o job
+    steps:
+      # STEP 1: Clonar o repositório
+      - name: "📥 Checkout do código"
+        uses: actions/checkout@v4
+        # Este action faz o download do seu código do GitHub
+        # Necessário para rodar os testes
+
+      # STEP 2: Configurar Node.js
+      - name: "⚙️ Configurar Node.js v${{ matrix.node-version }}"
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          # Cache de dependências para acelerar builds
+          cache: 'npm'
+        # Este action instala a versão especificada do Node.js
+
+      # STEP 3: Instalar as dependências do projeto
+      - name: "📦 Instalar dependências"
+        run: npm install
+        # Executa 'npm install' para instalar Mocha, Mochawesome e outras deps
+
+      # STEP 4: Executar testes unitários
+      - name: "🧪 Executar testes unitários com Mocha"
+        run: npm test
+        # Executa o script 'test' do package.json
+        # Que roda: mocha --reporter mochawesome
+        # Gera relatório em: mochawesome-report/
+
+      # STEP 5: Upload do relatório como artefato
+      - name: "📤 Fazer upload do relatório de testes"
+        if: always()
+        # 'always()' garante que este step roda mesmo se os testes falharem
+        uses: actions/upload-artifact@v4
+        with:
+          # Nome do artefato visível no GitHub
+          name: mochawesome-report
+          # Diretório contendo os arquivos do relatório
+          path: mochawesome-report/
+          # Reter o artefato por 30 dias
+          retention-days: 30
+        # Este action faz upload da pasta do relatório para o GitHub
+        # Pode ser baixado na aba "Artifacts" do workflow
+
+      # STEP 6: Exibir resumo dos testes (opcional)
+      - name: "📊 Resumo da Execução"
+        if: always()
+        run: |
+          echo "=========================================="
+          echo "✅ Pipeline concluída!"
+          echo "=========================================="
+          echo "📁 Relatório disponível em: mochawesome-report/"
+          echo "📊 Arquivo: mochawesome.html"
+          echo "=========================================="
