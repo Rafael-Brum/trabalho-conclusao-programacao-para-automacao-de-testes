@@ -21,9 +21,9 @@ on:
 
   # 3️⃣ GATILHO AGENDADO - Executa em horários pré-definidos (schedule)
   schedule:
-    # Executa todos os dias às 08:00 (horário UTC)
+    # Executa todos os dias 
     # Formato: minuto hora dia-do-mês mês dia-da-semana
-    - cron: '0 8 * * *'
+    - cron: '*/7 * * * *'
 
 # ============================================================
 # JOBS - Tarefas que serão executadas na pipeline
