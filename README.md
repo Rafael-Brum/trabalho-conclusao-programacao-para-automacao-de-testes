@@ -52,7 +52,7 @@ Este projeto implementa uma **Pipeline de Integração Contínua** que automatiz
 ### 3 Formas de Execução
 1. **PUSH (Automático)**: A pipeline dispara automaticamente ao fazer `git push` para a branch `master`.
 2. **MANUAL (workflow_dispatch)**: Acesse GitHub → Actions → "CI - Testes Unitários" → "Run workflow" para executar sob demanda.
-3. **SCHEDULE (Agendado)**: A pipeline executa automaticamente todos os dias às 08:00 UTC.
+3. **SCHEDULE (Agendado)**: A pipeline executa automaticamente de 7 em 7 minutos.
 
 ### Relatório de Testes
 - O relatório visual (HTML) é gerado automaticamente pelo **Mochawesome** após cada execução.
@@ -62,7 +62,4 @@ Este projeto implementa uma **Pipeline de Integração Contínua** que automatiz
 ### Armazenamento de Artefatos
 - Os relatórios são armazenados como **artifacts** no GitHub por **30 dias**.
 - Você pode baixar e analisar o histórico de testes a qualquer momento.
-- Consulte [PIPELINE_CI_CD.md](PIPELINE_CI_CD.md) para documentação completa sobre CI/CD.
 
----
-Desenvolvido para fins acadêmicos.
