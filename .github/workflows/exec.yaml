@@ -14,7 +14,7 @@ on:
   # 1️⃣ GATILHO DE PUSH - Executa automaticamente ao fazer push para master
   push:
     branches:
-      - master
+      - main
 
   # 2️⃣ GATILHO MANUAL - Executa quando acionado manualmente no GitHub
   workflow_dispatch:
